@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-28 14:58:29.018049",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "scheme_name",
+  "enroll_date",
+  "scheme_type",
+  "scheme_tenure",
+  "scheme_end_date",
+  "installment_amount",
+  "calculate_due_dates",
+  "installment_deatils",
+  "amount_installment_details",
+  "total_investment",
+  "total_due",
+  "total_overdue",
+  "total_paid_amount",
+  "status",
+  "company",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "scheme_name",
+   "fieldtype": "Link",
+   "label": "Scheme Name",
+   "options": "Gold Scheme"
+  },
+  {
+   "fieldname": "enroll_date",
+   "fieldtype": "Date",
+   "label": "Enroll Date"
+  },
+  {
+   "fetch_from": "scheme_name.scheme_type",
+   "fieldname": "scheme_type",
+   "fieldtype": "Data",
+   "label": "Scheme Type"
+  },
+  {
+   "fetch_from": "scheme_name.scheme_tenure",
+   "fieldname": "scheme_tenure",
+   "fieldtype": "Data",
+   "label": "Scheme Tenure"
+  },
+  {
+   "fieldname": "scheme_end_date",
+   "fieldtype": "Date",
+   "label": "Scheme End Date"
+  },
+  {
+   "fieldname": "installment_amount",
+   "fieldtype": "Data",
+   "label": "Installment Amount"
+  },
+  {
+   "fieldname": "calculate_due_dates",
+   "fieldtype": "Data",
+   "label": "Calculate Due Dates"
+  },
+  {
+   "fieldname": "installment_deatils",
+   "fieldtype": "Data",
+   "label": "Installment Deatils"
+  },
+  {
+   "fieldname": "amount_installment_details",
+   "fieldtype": "Data",
+   "label": "Amount Installment Details"
+  },
+  {
+   "fieldname": "total_investment",
+   "fieldtype": "Data",
+   "label": "Total investment"
+  },
+  {
+   "fieldname": "total_due",
+   "fieldtype": "Data",
+   "label": "Total Due"
+  },
+  {
+   "fieldname": "total_overdue",
+   "fieldtype": "Data",
+   "label": "Total Overdue"
+  },
+  {
+   "fieldname": "total_paid_amount",
+   "fieldtype": "Data",
+   "label": "Total Paid Amount"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Gold Scheme Allocation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-01 11:32:35.499034",
+ "modified_by": "Administrator",
+ "module": "ERPgold",
+ "name": "Gold Scheme Allocation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

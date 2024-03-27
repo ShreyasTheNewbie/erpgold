@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-28 14:44:06.446336",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "scheme_name",
+  "status",
+  "start_date",
+  "scheme_tenure",
+  "last_date_of_enroll",
+  "scheme_type",
+  "is_free_installment_scheme",
+  "expence_account",
+  "no_of_free_installment",
+  "paid_installment",
+  "scheme_deatils",
+  "scheme_rule",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "scheme_name",
+   "fieldtype": "Data",
+   "label": "Scheme Name"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "scheme_tenure",
+   "fieldtype": "Data",
+   "label": "Scheme Month Tenure"
+  },
+  {
+   "fieldname": "last_date_of_enroll",
+   "fieldtype": "Date",
+   "label": "Last Date of Enroll"
+  },
+  {
+   "fieldname": "scheme_type",
+   "fieldtype": "Link",
+   "label": "Scheme Type",
+   "options": "Scheme Type"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_free_installment_scheme",
+   "fieldtype": "Check",
+   "label": "Is Free Installment Scheme"
+  },
+  {
+   "fieldname": "expence_account",
+   "fieldtype": "Link",
+   "label": "Expence Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "no_of_free_installment",
+   "fieldtype": "Int",
+   "label": "No. of Free Installment"
+  },
+  {
+   "fieldname": "paid_installment",
+   "fieldtype": "Int",
+   "label": "Paid Installment"
+  },
+  {
+   "fieldname": "scheme_deatils",
+   "fieldtype": "Data",
+   "label": "Scheme Deatils"
+  },
+  {
+   "fieldname": "scheme_rule",
+   "fieldtype": "Data",
+   "label": "Scheme Rule"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Gold Scheme",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-01 11:25:02.523372",
+ "modified_by": "Administrator",
+ "module": "ERPgold",
+ "name": "Gold Scheme",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

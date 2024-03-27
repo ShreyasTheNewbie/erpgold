@@ -1,0 +1,24 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Item",
+  "enabled": 0,
+  "modified": "2024-03-06 18:32:19.631481",
+  "module": null,
+  "name": "custom_is_jewellery_item",
+  "script": "frappe.ui.form.on('Item', {\n\trefresh(frm) {\n\t\t\n\t},\n\tcustom_is_jewellery_item: function(frm) {\n        if (frm.doc.custom_is_jewellery_item) {\n            frm.set_value('custom_maintain_jewellery_stock', 1); \n        } else {\n            frm.set_value('custom_maintain_jewellery_stock', 0); \n        }\n    }\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Serial No",
+  "enabled": 0,
+  "modified": "2024-03-09 11:53:29.910355",
+  "module": null,
+  "name": "serial no image",
+  "script": "frappe.ui.form.on('Serial No', {\n\t\n\tcustom_a_image: function (frm) {\n\t\tif (frm.is_dirty()) {\n\t\t    frm.fields_dict.custom_image.$wrapper.css('max-width', '200px');\n\t\t\tfrm.refresh_field('custom_image');\n\t\t}\n\t}\n});",
+  "view": "Form"
+ }
+]

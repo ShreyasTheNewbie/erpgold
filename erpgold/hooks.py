@@ -10,7 +10,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/erpgold/css/erpgold.css"
-# app_include_js = "/assets/erpgold/js/erpgold.js"
+app_include_js = "/assets/erpgold/js/barcode_scan.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/erpgold/css/erpgold.css"
@@ -109,20 +109,31 @@ app_license = "MIT"
 # Override standard doctype classes
 
 # override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
+#     "Purchase Receipt":"erpgold.erpgold.override.serial_no.CustomPurchaseReceipt"
 # }
 
 # Document Events
 # ---------------
 # Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+ 
+doc_events = {
+    "Sales Invoice": {
+        "after_save": "erpgold.erpgold.override.totalWeights.calculate_total_weights"
+    }
+#     "Serial No":{
+#         "get_item_details" : "erpgold.erpgold.override.serial_no.get_item_details",
+#         "validate_item" : "erpgold.erpgold.override.serial_no.cvalidate_item",
+#         "get_item_details" : "erpgold.erpgold.override.serial_no.get_item_details"
+#     },
+#     "Purchase Receipt":{
+#         "after_submit":"erpgold.erpgold.override.serial_no.update_serial_nos_after_submit"
+#     }
+# # 	# "*": {
+# # 	# 	"on_update": "method",
+# # 	# 	"on_cancel": "method",
+# # 	# 	"on_trash": "method"
+# # 	# }
+}
 
 # Scheduled Tasks
 # ---------------
@@ -153,10 +164,10 @@ app_license = "MIT"
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "erpgold.event.get_events"
-# }
-#
+override_whitelisted_methods = {
+	"erpnext.stock.utils.scan_barcode": "erpgold.barcode.custom_scan_barcode"
+}
+# #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
@@ -213,3 +224,31 @@ app_license = "MIT"
 # auth_hooks = [
 # 	"erpgold.auth.validate"
 # ]
+
+# fixtures = [
+#     {
+#     "dt": ("Custom Field"), 
+#         "filters": [["dt", "in", ("Item","Purchase Invoice Item","Sales Invoice Item","Sales Order Item","Delivery Note Item","Sales Invoice","Sales Order","Delivery Note Item","Purchase Receipt","Purchase order","Purchase order item","Serial No","Payment Entry")]]
+#     }  
+# ]
+fixtures = [
+    {
+    "dt": ("Custom Field"), 
+        "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipts","Purchase Rececipts Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Details","Serial No.","Payment Entry","Customer")]]
+    }
+    
+]
+
+
+
+doctype_js = {
+    "Item": "public/js/extend.js",
+    "Purchase Order" : "public/js/weight_calculation.js",
+    # "Sales Order" : "public/js/sales_in_w_calc.js",
+    "Serial No" : "public/js/serialno_image.js" ,
+    "Purchase Receipt" : "public/js/purchase_receipt_item.js",
+    "Sales Invoice" : "public/js/salesinitem.js",
+    "Delivery Note" : "public/js/dni.js",
+    "Purchase Invoice" : "public/js/pii.js",
+    "Sales Order" : "public/js/soi.js",
+}
