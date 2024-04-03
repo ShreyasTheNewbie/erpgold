@@ -17,7 +17,7 @@ frappe.ui.form.on('Purchase Receipt Item', {
         calculateNetWeight(frm,cdt,cdn);
         calculateFineWeight(frm,cdt,cdn);
     },
-    custom_purity_percentage_:function(frm, cdt, cdn) {
+    custom_purity_percentage:function(frm, cdt, cdn) {
         calculateFineWeight(frm,cdt,cdn);
         custom_gold_value(frm,cdt,cdn);
     },
@@ -25,6 +25,7 @@ frappe.ui.form.on('Purchase Receipt Item', {
         custom_gold_value(frm, cdt, cdn);
         saleslabourtype(frm, cdt, cdn);
         labourtype(frm, cdt, cdn);
+        totalWeights;
     },
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
@@ -47,6 +48,7 @@ frappe.ui.form.on('Purchase Receipt Item', {
 			frm.refresh_field('image_view');
 		}
 	}, 
+    
 });
 
 function calculateNetWeight(frm, cdt, cdn) {
@@ -66,11 +68,11 @@ function calculateNetWeight(frm, cdt, cdn) {
 function calculateFineWeight(frm, cdt, cdn) {
     var child = locals[cdt][cdn];
     var net_weight = child.custom_net_weight;
-    var purity_percent = child.custom_purity_percentage_;
+    var purity_percent = child.custom_purity_percentage;
     var qty = child.qty;
 
     if (net_weight !== undefined && purity_percent !== undefined) {
-        var fine_weight = net_weight / (purity_percent / 100);
+        var fine_weight = net_weight * (purity_percent / 100);
         frappe.model.set_value(cdt, cdn, 'custom_fine_weight', fine_weight);
         refresh_field('custom_fine_weight');
     }
@@ -189,32 +191,6 @@ function labourtype(frm, cdt, cdn){
         refresh_field('custom_labour_amount')
     }
 }
-
-// function fetchMetalRate(frm, cdt, cdn) {
-//     var child = locals[cdt][cdn];
-//     var custom_purity = child.custom_purity;
-//     var mt = child.custom_metal_type;
-//     var date = frm.doc.posting_date;
-   
-//     frm.call({        
-//         method: 'erpgold.erpgold.doctype.metal_rate.metal_rate.query',
-//         args: {   
-//             date: date, 
-//             metal_type : mt ,      
-//             purity: custom_purity,       
-//         },
-//         callback: function(r) {
-//             if (r.message){
-//                 frappe.model.set_value(cdt, cdn, 'custom_gold_rate', r.message);
-//                 refresh_field('custom_gold_rate');
-//             }
-//             else {
-//                 frappe.model.set_value(cdt, cdn, 'custom_gold_rate', undefined);
-//                 frappe.throw("<h5><a href='http://127.0.0.1:8001/app/metal-rate' , style='color:#2490ef'>Metal Rate</a> is not available or not submitted.");
-//             }
-//         }
-//     });
-// }
 
 function calculateTotalAmount(frm, cdt, cdn) {
     var child = locals[cdt][cdn];

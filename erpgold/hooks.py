@@ -117,9 +117,18 @@ app_include_js = "/assets/erpgold/js/barcode_scan.js"
 # Hook on document methods and events
  
 doc_events = {
-    "Sales Invoice": {
-        "after_save": "erpgold.erpgold.override.totalWeights.calculate_total_weights"
-    }
+    # "Sales Invoice": {
+    #     "after_save": "erpgold.erpgold.override.totalWeights.calculate_total_weights"
+    # },
+     "Stock Entry": {
+        "on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
+    },
+	"Purchase Receipt": {
+        "on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
+    },
+	"purchase Invoice":{
+		"on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
+	}
 #     "Serial No":{
 #         "get_item_details" : "erpgold.erpgold.override.serial_no.get_item_details",
 #         "validate_item" : "erpgold.erpgold.override.serial_no.cvalidate_item",
@@ -128,11 +137,7 @@ doc_events = {
 #     "Purchase Receipt":{
 #         "after_submit":"erpgold.erpgold.override.serial_no.update_serial_nos_after_submit"
 #     }
-# # 	# "*": {
-# # 	# 	"on_update": "method",
-# # 	# 	"on_cancel": "method",
-# # 	# 	"on_trash": "method"
-# # 	# }
+
 }
 
 # Scheduled Tasks
@@ -165,7 +170,7 @@ doc_events = {
 # ------------------------------
 #
 override_whitelisted_methods = {
-	"erpnext.stock.utils.scan_barcode": "erpgold.barcode.custom_scan_barcode"
+	"erpnext.stock.utils.scan_barcode": "erpgold.erpgold.override.barcode.custom_scan_barcode"
 }
 # #
 # each overriding function accepts a `data` argument;
@@ -235,20 +240,22 @@ fixtures = [
     {
     "dt": ("Custom Field"), 
         "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipts","Purchase Rececipts Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Details","Serial No.","Payment Entry","Customer")]]
-    }
+    },
+    "Property Setter"
     
 ]
 
 
 
 doctype_js = {
-    "Item": "public/js/extend.js",
-    "Purchase Order" : "public/js/weight_calculation.js",
+    "Item": "public/js/item.js",
+    "Purchase Order" : "public/js/purchase_order.js",
     # "Sales Order" : "public/js/sales_in_w_calc.js",
-    "Serial No" : "public/js/serialno_image.js" ,
+    "Serial No" : "public/js/serial_no.js" ,
     "Purchase Receipt" : "public/js/purchase_receipt_item.js",
-    "Sales Invoice" : "public/js/salesinitem.js",
-    "Delivery Note" : "public/js/dni.js",
-    "Purchase Invoice" : "public/js/pii.js",
-    "Sales Order" : "public/js/soi.js",
+    "Sales Invoice" : "public/js/sales_invoice.js",
+    "Delivery Note" : "public/js/delivery_note.js",
+    "Purchase Invoice" : "public/js/purchase_invoice.js",
+    "Sales Order" : "public/js/sales_order.js",
+    "Stock Entry" : "public/js/stock_entry.js"
 }

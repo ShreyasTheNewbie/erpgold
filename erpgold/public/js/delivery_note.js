@@ -1,14 +1,10 @@
-frappe.ui.form.on('Sales Invoice', {
-     
-});
-frappe.ui.form.on('Sales Invoice Item', {
+frappe.ui.form.on('Delivery Note Item', {
     item_code:function(frm, cdt, cdn) {
-        fetchMetalRate(frm,cdt,cdn)
+        // fetchMetalRate(frm,cdt,cdn)
     },
     custom_gross_weight: function(frm, cdt, cdn) {
         calculateNetWeight(frm, cdt, cdn);
         labourtype(frm, cdt, cdn);
-        calculateFineWeight(frm, cdt, cdn);
     },
     custom_net_weight: function(frm, cdt, cdn) {
         calculateFineWeight(frm,cdt,cdn);
@@ -23,22 +19,21 @@ frappe.ui.form.on('Sales Invoice Item', {
         custom_gold_value(frm,cdt,cdn);
     },
     qty: function(frm, cdt, cdn) {
+        // calculateNetWeight(frm, cdt, cdn);
+        // calculateFineWeight(frm, cdt, cdn);
         custom_gold_value(frm, cdt, cdn);
         labourtype(frm, cdt, cdn);
-        // totalWeights(frm, cdt, cdn);
     },
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
-        // totalWeights(frm,cdt,cdn);
+        totalWeights(frm,cdt,cdn);
     },
     custom_gold_value:function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
     custom_labour_type:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
     custom_sales_labour_rate:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
-    custom_sales_labour_amount: function(frm,cdt,cdn){calculateTotalAmount(frm,cdt,cdn)},
+    custom_labour_amount: function(frm,cdt,cdn){calculateTotalAmount(frm,cdt,cdn)},
     custom_other_amount:function(frm, cdt, cdn) { calculateTotalAmount(frm,cdt,cdn)},
     custom_discount: function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
-
-
 });
 
 function calculateNetWeight(frm, cdt, cdn) {
@@ -46,6 +41,8 @@ function calculateNetWeight(frm, cdt, cdn) {
     var gross_weight = child.custom_gross_weight;
     var less_weight = child.custom_less_weight;
     var qty = child.qty;
+
+   
     if (gross_weight !== undefined && less_weight !== undefined) {
         var net_weight = gross_weight - less_weight;
         frappe.model.set_value(cdt, cdn, 'custom_net_weight', net_weight);
@@ -78,6 +75,7 @@ function custom_gold_value(frm, cdt, cdn) {
         refresh_field('custom_gold_value');
     }
 }
+
 
 function labourtype(frm, cdt, cdn){
     var child = locals[cdt][cdn];
@@ -149,7 +147,7 @@ function fetchMetalRate(frm, cdt, cdn) {
             }
             else {
                 frappe.model.set_value(cdt, cdn, 'custom_gold_rate', undefined);
-                frappe.throw("<h5><a href='http://127.0.0.1:8001/app/metal-rate' , style='color:#2490ef'>Metal Rate</a> is not available or not submitted.");
+                frappe.throw('Metal rate is not available or not submitted.');
             }
         }
     });
@@ -185,3 +183,4 @@ function calculateTotalAmount(frm, cdt, cdn) {
 //     frm.set_value('custom_total_less_weight', total_less_weight);
 //     frm.set_value('custom_total_fine_weight', total_fine_weight);
 // }
+
