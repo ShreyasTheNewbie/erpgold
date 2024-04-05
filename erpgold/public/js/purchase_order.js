@@ -1,6 +1,13 @@
+frappe.ui.form.on('Purchase Order', {
+    custom_booking_rate: function(frm, cdt, cdn) {
+        frm.doc.items.forEach(function(i){
+            finevalue(frm,i.doctype, i.name)
+        })
+    }
+});
 frappe.ui.form.on('Purchase Order Item', {
     item_code:function(frm, cdt, cdn) {
-
+        // fetchMetalRate(frm,cdt,cdn)
     },
     custom_gross_weight: function(frm, cdt, cdn) {
         calculateNetWeight(frm, cdt, cdn);
@@ -16,7 +23,7 @@ frappe.ui.form.on('Purchase Order Item', {
         calculateNetWeight(frm,cdt,cdn);
         calculateFineWeight(frm,cdt,cdn);
     },
-    custom_purity_percentage:function(frm, cdt, cdn) {
+    custom_purity_percentage_:function(frm, cdt, cdn) {
         calculateFineWeight(frm,cdt,cdn);
         custom_gold_value(frm,cdt,cdn);
     },
@@ -28,8 +35,11 @@ frappe.ui.form.on('Purchase Order Item', {
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
         totalWeights(frm,cdt,cdn);
+        finevalue;
     },
-    
+    custom_gold_rate:function(frm, cdt, cdn) {
+        custom_gold_value(frm,cdt,cdn);
+    },    
     custom_gold_value:function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
     custom_labour_type:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
     custom_sales_labour_type:function(frm, cdt, cdn) {saleslabourtype(frm,cdt,cdn)},
@@ -37,7 +47,7 @@ frappe.ui.form.on('Purchase Order Item', {
     custom_labour_amount: function(frm,cdt,cdn){calculateTotalAmount(frm,cdt,cdn)},
     custom_other_amount:function(frm, cdt, cdn) { calculateTotalAmount(frm,cdt,cdn)},
     custom_discount: function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
-
+    
 
     image: function (frm,cdt,cdn) {
 		if (frm.is_dirty()) {
@@ -70,7 +80,7 @@ function calculateFineWeight(frm, cdt, cdn) {
     var qty = child.qty;
 
     if (net_weight !== undefined && purity_percent !== undefined) {
-        var fine_weight = net_weight / (purity_percent / 100);
+        var fine_weight = net_weight * (purity_percent / 100);
         frappe.model.set_value(cdt, cdn, 'custom_fine_weight', fine_weight);
         refresh_field('custom_fine_weight');
 
@@ -172,6 +182,9 @@ function labourtype(frm, cdt, cdn){
         frappe.model.set_value(cdt, cdn, 'custom_labour_rate', '15');
         refresh_field('custom_labour_rate')
 
+
+        
+   
         
         var custom_labour_rate=child.custom_labour_rate;
         var gold_value=child.custom_gold_value;
@@ -183,7 +196,6 @@ function labourtype(frm, cdt, cdn){
         frappe.model.set_value(cdt, cdn, 'custom_labour_rate', '7000');
         frm.refresh_field('custom_labour_rate')
 
-
         var custom_labour_rate=child.custom_labour_rate;    
         var la = (qty * custom_labour_rate) 
         frappe.model.set_value(cdt, cdn, 'custom_labour_amount', la);
@@ -191,6 +203,13 @@ function labourtype(frm, cdt, cdn){
     }
 }
 
+function finevalue(frm, cdt, cdn) {
+    var br = frm.doc.custom_booking_rate;
+    var child= locals[cdt][cdn];
+    var fine_weight = child.custom_fine_weight;
+    var fv = br * fine_weight;
+    frappe.model.set_value(cdt, cdn, 'custom_fine_value', fv);
+}
 
 function calculateTotalAmount(frm, cdt, cdn) {
     var child = locals[cdt][cdn];
@@ -203,7 +222,6 @@ function calculateTotalAmount(frm, cdt, cdn) {
     frappe.model.set_value(cdt, cdn, 'rate', total_amount);
     refresh_field("custom_total_amount")
 }
-
 
 function totalWeights(frm, cdt, cdn) {
     var total_gross_weight = 0;
@@ -223,11 +241,3 @@ function totalWeights(frm, cdt, cdn) {
     frm.set_value('custom_total_less_weight', total_less_weight);
     frm.set_value('custom_total_fine_weight', total_fine_weight);
 }
-
-
-
-
-
- 
- 
-

@@ -1,3 +1,10 @@
+frappe.ui.form.on('Purchase Invoice', {
+    custom_booking_rate: function(frm, cdt, cdn) {
+        frm.doc.items.forEach(function(i){
+            finevalue(frm,i.doctype, i.name)
+        })
+    }
+});
 frappe.ui.form.on('Purchase Invoice Item', {
     item_code:function(frm, cdt, cdn) {
         // fetchMetalRate(frm,cdt,cdn)
@@ -28,8 +35,11 @@ frappe.ui.form.on('Purchase Invoice Item', {
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
         totalWeights(frm,cdt,cdn);
+        finevalue;
     },
-    
+    custom_gold_rate:function(frm, cdt, cdn) {
+        custom_gold_value(frm,cdt,cdn);
+    },    
     custom_gold_value:function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
     custom_labour_type:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
     custom_sales_labour_type:function(frm, cdt, cdn) {saleslabourtype(frm,cdt,cdn)},
@@ -37,6 +47,7 @@ frappe.ui.form.on('Purchase Invoice Item', {
     custom_labour_amount: function(frm,cdt,cdn){calculateTotalAmount(frm,cdt,cdn)},
     custom_other_amount:function(frm, cdt, cdn) { calculateTotalAmount(frm,cdt,cdn)},
     custom_discount: function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
+    
 });
 
 function calculateNetWeight(frm, cdt, cdn) {
@@ -180,32 +191,13 @@ function labourtype(frm, cdt, cdn){
     }
 }
 
-
-// function fetchMetalRate(frm, cdt, cdn) {
-//     var child = locals[cdt][cdn];
-//     var custom_purity = child.custom_purity;
-//     var mt = child.custom_metal_type;
-//     var date = frm.doc.posting_date;
-   
-//     frm.call({        
-//         method: 'erpgold.erpgold.doctype.metal_rate.metal_rate.query',
-//         args: {   
-//             date: date, 
-//             metal_type : mt ,      
-//             purity: custom_purity,       
-//         },
-//         callback: function(r) {
-//             if (r.message){
-//                 frappe.model.set_value(cdt, cdn, 'custom_gold_rate', r.message);
-//                 refresh_field('custom_gold_rate');
-//             }
-//             else {
-//                 frappe.model.set_value(cdt, cdn, 'custom_gold_rate', undefined);
-//                 frappe.throw('Metal rate is not available or not submitted.');
-//             }
-//         }
-//     });
-// }
+function finevalue(frm, cdt, cdn) {
+    var br = frm.doc.custom_booking_rate;
+    var child= locals[cdt][cdn];
+    var fine_weight = child.custom_fine_weight;
+    var fv = br * fine_weight;
+    frappe.model.set_value(cdt, cdn, 'custom_fine_value', fv);
+}
 
 function calculateTotalAmount(frm, cdt, cdn) {
     var child = locals[cdt][cdn];

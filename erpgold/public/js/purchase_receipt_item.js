@@ -1,3 +1,12 @@
+frappe.ui.form.on('Purchase Receipt', {
+    custom_booking_rate: function(frm, cdt, cdn) {
+        frm.doc.items.forEach(function(i){
+            finevalue(frm,i.doctype, i.name)
+        })
+        // }
+        
+    },
+});
 frappe.ui.form.on('Purchase Receipt Item', {
     item_code:function(frm, cdt, cdn) {
         // fetchMetalRate(frm,cdt,cdn)
@@ -30,8 +39,9 @@ frappe.ui.form.on('Purchase Receipt Item', {
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
         totalWeights(frm,cdt,cdn);
+        finevalue(frm, cdt, cdn);   
     },
-    
+    custom_gold_rate:function(frm, cdt, cdn) {custom_gold_value(frm,cdt,cdn)},
     custom_gold_value:function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
     custom_labour_type:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
     custom_sales_labour_type:function(frm, cdt, cdn) {saleslabourtype(frm,cdt,cdn)},
@@ -49,13 +59,13 @@ frappe.ui.form.on('Purchase Receipt Item', {
 		}
 	}, 
     
+    
 });
 
 function calculateNetWeight(frm, cdt, cdn) {
     var child = locals[cdt][cdn];
     var gross_weight = child.custom_gross_weight;
     var less_weight = child.custom_less_weight;
-    var qty = child.qty;
 
 
     if (gross_weight !== undefined && less_weight !== undefined) {
@@ -204,6 +214,16 @@ function calculateTotalAmount(frm, cdt, cdn) {
     refresh_field("custom_total_amount")
 }
 
+function finevalue(frm, cdt, cdn) {
+    var br = frm.doc.custom_booking_rate;
+    var child= locals[cdt][cdn];
+    var fine_weight = child.custom_fine_weight;
+    var fv = br * fine_weight;
+    frappe.model.set_value(cdt, cdn, 'custom_fine_value', fv);
+    console.log("as")
+
+
+}
 
 function totalWeights(frm, cdt, cdn) {
     var total_gross_weight = 0;

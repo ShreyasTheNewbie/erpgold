@@ -239,9 +239,9 @@ override_whitelisted_methods = {
 fixtures = [
     {
     "dt": ("Custom Field"), 
-        "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipts","Purchase Rececipts Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Details","Serial No.","Payment Entry","Customer")]]
+        "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipt","Purchase Rececipt Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Details","Serial No.","Payment Entry","Customer")]]
     },
-    "Property Setter"
+    # "Property Setter"
     
 ]
 
