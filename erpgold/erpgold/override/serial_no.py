@@ -26,6 +26,7 @@ def custom_update_serial_nos_after_submit(controller, parentfield):
     for sle1 in sle: 
         vd = sle1['voucher_detail_no'].split('\n')
         for v in vd:
+         if sle1['serial_no'] is not None:  # Check if serial_no is not None
             serial_numbers = sle1['serial_no'].split('\n')
             
             for serial_no in serial_numbers:

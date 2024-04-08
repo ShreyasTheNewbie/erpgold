@@ -126,7 +126,7 @@ doc_events = {
 	"Purchase Receipt": {
         "on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
     },
-	"purchase Invoice":{
+	"Purchase Invoice":{
 		"on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
 	}
 #     "Serial No":{
