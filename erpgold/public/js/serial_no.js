@@ -12,7 +12,7 @@ frappe.ui.form.on('Serial No', {
 			"custom_other_amount", "custom_sales_labour_type",
 			"custom_sales_labour_amount", "custom_is_jewellery_item"
 		];
-
+		
 		for (let f of fields) {
 			frm.set_df_property(f, "read_only", true);
 		}
