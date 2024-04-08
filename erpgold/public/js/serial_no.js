@@ -10,7 +10,7 @@ frappe.ui.form.on('Serial No', {
 			"custom_gross_weight", "custom_less_weight", "custom_net_weight", "custom_wastage",
 			"custom_fine_weight", "custom_gold_rate", "custom_gold_value", "custom_mrp_rate",
 			"custom_other_amount", "custom_sales_labour_type",
-			"custom_sales_labour_amount", "custom_is_jewellery_item","custom_sales_labour_type","custom_sales_labour_rate", "custom_labour_rate","custom_a_image"
+			"custom_sales_labour_amount", "custom_is_jewellery_item","custom_sales_labour_type","custom_sales_labour_rate", "custom_labour_rate","custom_a_image","custom_labour_type"
 		];
 		
 		for (let f of fields) {
