@@ -68,7 +68,7 @@ frappe.ui.form.on('Stock Audit', {
 								return;
 							}
 							else{
-								frappe.show_alert(i.name + " : " + i.item_name +" is  already delivered added in Not in Stock table.");
+								frappe.show_alert(i.name + " : " + i.item_name +" is  already delivered and added in Not in Stock table.");
 								return;
 							}
 						});
