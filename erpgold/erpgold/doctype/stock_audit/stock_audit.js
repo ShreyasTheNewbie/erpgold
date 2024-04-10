@@ -82,6 +82,8 @@ frappe.ui.form.on('Stock Audit', {
 				  else{frappe.show_alert("Barcode not found in the system.");}
 				frm.set_value('scan_barcode', ''); 
 			} 
+		}).then(() => {
+			// frm.set_value('scan_barcode', '');
 		})
 	}
 	},
