@@ -23,7 +23,8 @@ frappe.ui.form.on('Stock Audit', {
 		})
 	},
 	scan_barcode: function (frm) {
-		if(frm.doc.scan_barcode !== ''){
+		frm.refresh_field('not_in_stock');
+		if(frm.doc.scan_barcode !== '' ){
 		var not_in_stock = frm.doc.not_in_stock.length;
 		var not_found = frm.doc.total_not_found_items;
 
@@ -81,15 +82,9 @@ frappe.ui.form.on('Stock Audit', {
 				  else{frappe.show_alert("Barcode not found in the system.");}
 				frm.set_value('scan_barcode', ''); 
 			} 
+		}).then(() => {
+			// frm.set_value('scan_barcode', '');
 		})
 	}
 	},
 });
-
-// frappe.ui.form.on('Not In Stock', {
-// 	not_in_stock_remove(frm, cdt, cdn) {
-// 		var not_in_stock = frm.doc.not_in_stock.length;
-// 		not_in_stock = not_in_stock - 1;
-// 		frm.set_value('total_not_in_stock_items', not_in_stock);
-// 	},
-// })
