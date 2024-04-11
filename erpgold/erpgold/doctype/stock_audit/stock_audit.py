@@ -19,8 +19,7 @@ class StockAudit(Document):
         sn = frappe.db.get_all('Serial No', filters={'name': self.scan_barcode,}, fields=['name', 'status' , 'item_code' , 'item_name'])
         if sn:
             return sn
-        else:
-            frappe.msgprint(_("Invalid Serial No"),alert =True, indicator='red')
-            self.scan_barcode = ""
+        else: 
             return False
+        
 
