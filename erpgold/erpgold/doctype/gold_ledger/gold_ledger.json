@@ -16,7 +16,9 @@
   "serial_no",
   "warehouse",
   "party_type",
+  "party_",
   "party",
+  "column_break_u1h2u",
   "debit",
   "debit_gold",
   "credit",
@@ -26,17 +28,20 @@
   "credit_in_account_currency",
   "voucher_type",
   "voucher_no",
+  "voucher_detail_no",
   "fiscal_year",
   "is_cancelled",
   "amended_from"
  ],
  "fields": [
   {
-   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
    "label": "Posting Date",
-   "read_only": 1
+   "read_only": 1,
+   "search_index": 1
   },
   {
    "fieldname": "item_code",
@@ -55,8 +60,7 @@
    "fetch_from": "item_code.custom_purity",
    "fieldname": "purity",
    "fieldtype": "Data",
-   "label": "Purity",
-   "options": "Purity"
+   "label": "Purity"
   },
   {
    "fetch_from": "item_code.custom_purity_percentage_",
@@ -71,33 +75,41 @@
   },
   {
    "fieldname": "warehouse",
-   "fieldtype": "Data",
-   "label": "Warehouse"
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse"
   },
   {
    "fieldname": "party_type",
-   "fieldtype": "Data",
-   "label": "Party Type"
+   "fieldtype": "Select",
+   "label": "Party Type",
+   "options": "Supplier\nCustomer"
   },
   {
+   "depends_on": "eval:doc.party_type==='Customer'",
    "fieldname": "party",
-   "fieldtype": "Data",
-   "label": "Party"
+   "fieldtype": "Link",
+   "label": "Party",
+   "mandatory_depends_on": "eval:doc.party_type==='Customer'",
+   "options": "Customer"
   },
   {
    "fieldname": "debit",
-   "fieldtype": "Data",
-   "label": "Debit Amount"
+   "fieldtype": "Currency",
+   "label": "Debit Amount",
+   "options": "Company:company:default_currency"
   },
   {
    "fieldname": "debit_gold",
-   "fieldtype": "Data",
-   "label": "Debit Gold"
+   "fieldtype": "Float",
+   "label": "Debit Gold",
+   "precision": "3"
   },
   {
    "fieldname": "credit",
-   "fieldtype": "Data",
-   "label": "Credit Amount"
+   "fieldtype": "Currency",
+   "label": "Credit Amount",
+   "options": "Company:company:default_currency"
   },
   {
    "fieldname": "cerdit_gold",
@@ -106,33 +118,38 @@
   },
   {
    "fieldname": "account_currency",
-   "fieldtype": "Data",
-   "label": "Account Currency"
+   "fieldtype": "Link",
+   "label": "Account Currency",
+   "options": "Currency"
   },
   {
    "fieldname": "debit_in_account_currency",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Debit Amount in Account Currency"
   },
   {
    "fieldname": "credit_in_account_currency",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Credit Amount in Account Currency"
   },
   {
    "fieldname": "voucher_type",
-   "fieldtype": "Data",
-   "label": "Voucher Type"
+   "fieldtype": "Link",
+   "label": "Voucher Type",
+   "options": "DocType"
   },
   {
    "fieldname": "voucher_no",
-   "fieldtype": "Data",
-   "label": "Voucher No"
+   "fieldtype": "Dynamic Link",
+   "label": "Voucher No",
+   "options": "voucher_type"
   },
   {
    "fieldname": "fiscal_year",
    "fieldtype": "Data",
-   "label": "Fiscal Year"
+   "in_filter": 1,
+   "label": "Fiscal Year",
+   "read_only": 1
   },
   {
    "default": "0",
@@ -154,12 +171,31 @@
    "fieldname": "details_tab",
    "fieldtype": "Tab Break",
    "label": "Details"
+  },
+  {
+   "depends_on": "eval:doc.party_type==='Supplier'",
+   "fieldname": "party_",
+   "fieldtype": "Link",
+   "label": "Party",
+   "mandatory_depends_on": "eval:doc.party_type==='Supplier'",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_u1h2u",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "voucher_detail_no",
+   "fieldtype": "Data",
+   "label": "Voucher Detail No",
+   "read_only": 1
   }
  ],
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-07 10:24:53.319626",
+ "modified": "2024-04-11 12:11:01.474208",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Gold Ledger",
