@@ -3,9 +3,7 @@
 
 frappe.ui.form.on('Stock Audit', {
 
-	onload: function (frm) {
-		frm.get_field('stock_items').grid.cannot_add_rows = true;
-		frm.get_field('not_in_stock').grid.cannot_add_rows = true;
+	onload: function (frm) {	
 		frm.call({
 			doc: frm.doc,
 			method: 'items_in_stock',
@@ -35,10 +33,10 @@ frappe.ui.form.on('Stock Audit', {
 			method: 'serial',
 			callback: function (r) {
 				if (r.message) {
+					console.log(r.message);
 					var doc = frm.doc;
 					var barcode = r.message[0].name;
 					var status = r.message[0].status;
-					var item_name = r.message[0].item_name;
 
 					if (doc.scan_barcode) {
 					  doc.stock_items.forEach(function(d) {
@@ -47,7 +45,7 @@ frappe.ui.form.on('Stock Audit', {
 							d.checked = 1;
 						  }
 						  else{
-							show_alert("Item <b>"+ barcode + " : " + item_name +"</b> is already checked.", 'orange' , 4);
+							frappe.show_alert(barcode + " : " + r.message[0].item_name +" is already checked.");
 							return;
 							}
 						}
@@ -56,6 +54,7 @@ frappe.ui.form.on('Stock Audit', {
 					}
 					if(status == 'Delivered'){
 						r.message.forEach(function(i) {
+							console.log(not_in_stock);
 							var existingRow = frm.doc.not_in_stock.find(function(row) {
 								return row.serial_no === i.name;
 							});
@@ -65,28 +64,27 @@ frappe.ui.form.on('Stock Audit', {
 								frappe.model.set_value(row.doctype, row.name, 'item_code', i.item_code + " : " + i.item_name);
 								not_in_stock += 1;
 								frm.set_value('total_not_in_stock_items', not_in_stock);
-								show_alert("Item <b>"+ i.name + " : " + i.item_name +"</b> is not in Stock & added in Not in Stock table",'orange', 4);
+								frappe.show_alert(i.name + " : " + i.item_name +"  added in Not in Stock table.");
 								return;
 							}
 							else{
-								show_alert("Item <b>"+ i.name + " : " + i.item_name +"</b> is already added in Not in Stock table.",'orange', 4);
+								frappe.show_alert(i.name + " : " + i.item_name +" is  already delivered added in Not in Stock table.");
 								return;
 							}
 						});
+						
 					}
 					if(status == 'Inactive'){
-						show_alert("Item <b>"+ barcode + " : " +item_name +"</b> is Not Found",'orange', 5);
 						not_found += 1;
 						frm.set_value('total_not_found_items', not_found);
 					}
 				  }
+				  else{frappe.show_alert("Barcode not found in the system.");}
 				frm.set_value('scan_barcode', ''); 
 			} 
-		});
+		}).then(() => {
+			// frm.set_value('scan_barcode', '');
+		})
 	}
 	},
 });
-
-function show_alert(msg , indicator , duration){
-	frappe.show_alert({ message: msg, indicator: indicator }, duration);
-}
