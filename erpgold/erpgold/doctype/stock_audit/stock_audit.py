@@ -6,6 +6,7 @@ from frappe import _
 from frappe.model.document import Document
 
 class StockAudit(Document):
+    pass
     @frappe.whitelist()
     def items_in_stock(self):
         self.total_items_in_stock = frappe.db.count('Serial No', {'status': 'Active'})
@@ -20,7 +21,12 @@ class StockAudit(Document):
         if sn:
             return sn
         else:
-            frappe.msgprint(_("Invalid Serial No"),alert =True, indicator='red')
+            frappe.msgprint(_("Cannot find Item with this Barcode"),alert =True, indicator='red')
             self.scan_barcode = ""
             return False
-
+                                                                     
+    def before_submit(self):
+        checked = all(row.checked == 1 for row in self.get('stock_items'))
+        if not checked:
+            frappe.throw("Please verify all Items")
+            return False
