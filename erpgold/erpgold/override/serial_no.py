@@ -22,7 +22,7 @@ def custom_update_serial_nos_after_submit(controller, parentfield):
     #         #for each serialized item >>>>
     #         print("\n" +s)
     sle = frappe.db.get_all('Stock Ledger Entry', filters={"voucher_no": controller.name, "voucher_type": controller.doctype,}, fields=['serial_no', 'item_code', 'voucher_detail_no'])
-    print("\n" +str(sle))
+    # print("\n" +str(sle))
     for sle1 in sle: 
         vd = sle1['voucher_detail_no'].split('\n')
         for v in vd:

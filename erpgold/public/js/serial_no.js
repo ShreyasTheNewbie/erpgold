@@ -6,6 +6,7 @@ cur_frm.add_fetch("item_code", "image", "custom_a_image")
 
 frappe.ui.form.on('Serial No', {
 	onload: function(frm) {
+		frm.disable_save();
 		let fields = ["custom_size", "image", "custom_metal_type", "custom_purity", "custom_purity_percentage",
 			"custom_gross_weight", "custom_less_weight", "custom_net_weight", "custom_wastage",
 			"custom_fine_weight", "custom_gold_rate", "custom_gold_value", "custom_mrp_rate",

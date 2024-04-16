@@ -66,7 +66,7 @@ $(document).ready(function () {
 						posting_date = this.frm.doc.transaction_date
 					}
 					if (data.custom_is_jewellery_item == 1) {
-						if (data.custom_mrp_rate || this.frm.doc.doctype == "Stock Entry" || this.frm.doc.doctype == "Purchase Invoice" || this.frm.doc.doctype == "Purchase Receipt") {
+						if (data.custom_mrp_rate || this.frm.doc.doctype == "Stock Entry" || this.frm.doc.doctype == "Purchase Invoice" || this.frm.doc.doctype == "Purchase Receipt" || this.frm.doc.doctype == "Purchase Order") {
 							me.update_table(data).then(row => {
 								this.play_success_sound();
 								resolve(row);
@@ -398,7 +398,7 @@ $(document).ready(function () {
 			let serial_nos = this.dialog.get_value("serial_no") ?
 				this.dialog.get_value("serial_no").split("\n") : [];
 
-			if (in_list(serial_nos, serial_no)) {                   // nosemgrep
+			if (in_list(serial_nos, serial_no)) {                   
 				frappe.throw(__("Serial No {0} already scanned", [serial_no]));
 			}
 		},
