@@ -11,8 +11,7 @@ class StockAudit(Document):
     def items_in_stock(self):
         self.total_items_in_stock = frappe.db.count('Serial No', {'status': 'Active'})
         # items = frappe.db.get_all('Stock Ledger Entry', filters={'is_cancelled': 0 , "serial_no": ["!=", ""], 'actual_qty': [">", 0]}, fields=['item_code', 'actual_qty', 'serial_no'])
-        items = frappe.db.get_all('Serial No', filters={"status": "Active"}, fields=['name','item_code','item_name', #  'custom_gross_weight','custom_less_weight','custom_net_weight','custom_fine_weight'
-                                                                                     ])
+        items = frappe.db.get_all('Serial No', filters={"status": "Active"}, fields=['name','item_code','item_name', ])
         return items
 
     @frappe.whitelist()
@@ -25,8 +24,8 @@ class StockAudit(Document):
             self.scan_barcode = ""
             return False
                                                                      
-    def before_submit(self):
-        checked = all(row.checked == 1 for row in self.get('stock_items'))
-        if not checked:
-            frappe.throw("Please verify all Items")
-            return False
+    # def before_submit(self):
+    #     checked = all(row.checked == 1 for row in self.get('stock_items'))
+    #     if not checked:
+    #         frappe.throw("Please verify all Items")
+    #         return False
