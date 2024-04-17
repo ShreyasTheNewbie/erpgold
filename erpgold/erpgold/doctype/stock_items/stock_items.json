@@ -15,16 +15,17 @@
  "fields": [
   {
    "fieldname": "item_code",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Item Code",
-   "options": "Item",
    "read_only": 1
   },
   {
    "fieldname": "serial_nos",
-   "fieldtype": "Small Text",
+   "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Serial Nos",
+   "options": "Serial No",
    "read_only": 1
   },
   {
@@ -37,6 +38,7 @@
    "default": "0",
    "fieldname": "checked",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Checked",
    "read_only": 1
   }
@@ -44,7 +46,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-04-15 12:59:37.481512",
+ "modified": "2024-04-17 14:46:44.388125",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Stock Items",
