@@ -1,7 +1,7 @@
 import frappe
 @frappe.whitelist()
 def custom_update_serial_nos_after_submit(self, method):
-    for i in self.items:
+    for i in self.items: 
         fixed =frappe.db.get_value("Item", i.item_code, "is_fixed_asset")
         if fixed != 1:
             serial = i.serial_no
