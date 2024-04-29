@@ -2,6 +2,7 @@
 // For license information, please see license.txt
 frappe.ui.form.on('Metal Rate', {
     get_metal_list: function (frm) {
+        if(frm.is_new()) {
         frappe.call({
 			doc : frm.doc,
             method: 'get_metal_list',
@@ -20,5 +21,6 @@ frappe.ui.form.on('Metal Rate', {
                 }
             }
         });
+    }
     }
 });
