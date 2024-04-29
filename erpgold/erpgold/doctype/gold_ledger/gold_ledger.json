@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "GLE-.YYYY.-.#####",
  "creation": "2024-02-28 14:42:12.838376",
  "default_view": "List",
  "doctype": "DocType",
@@ -21,14 +22,13 @@
   "column_break_u1h2u",
   "debit",
   "debit_gold",
+  "credit_gold",
   "credit",
-  "cerdit_gold",
   "account_currency",
   "debit_in_account_currency",
   "credit_in_account_currency",
   "voucher_type",
   "voucher_no",
-  "voucher_detail_no",
   "fiscal_year",
   "is_cancelled",
   "amended_from"
@@ -46,6 +46,8 @@
   {
    "fieldname": "item_code",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Item Code",
    "options": "Item"
   },
@@ -70,8 +72,9 @@
   },
   {
    "fieldname": "serial_no",
-   "fieldtype": "Data",
-   "label": "Serial No"
+   "fieldtype": "Small Text",
+   "label": "Serial No",
+   "max_height": "80px"
   },
   {
    "fieldname": "warehouse",
@@ -112,11 +115,6 @@
    "options": "Company:company:default_currency"
   },
   {
-   "fieldname": "cerdit_gold",
-   "fieldtype": "Data",
-   "label": "Cerdit Gold"
-  },
-  {
    "fieldname": "account_currency",
    "fieldtype": "Link",
    "label": "Account Currency",
@@ -125,12 +123,14 @@
   {
    "fieldname": "debit_in_account_currency",
    "fieldtype": "Currency",
-   "label": "Debit Amount in Account Currency"
+   "label": "Debit Amount in Account Currency",
+   "options": "account_currency"
   },
   {
    "fieldname": "credit_in_account_currency",
    "fieldtype": "Currency",
-   "label": "Credit Amount in Account Currency"
+   "label": "Credit Amount in Account Currency",
+   "options": "account_currency"
   },
   {
    "fieldname": "voucher_type",
@@ -140,9 +140,8 @@
   },
   {
    "fieldname": "voucher_no",
-   "fieldtype": "Dynamic Link",
-   "label": "Voucher No",
-   "options": "voucher_type"
+   "fieldtype": "Data",
+   "label": "Voucher No"
   },
   {
    "fieldname": "fiscal_year",
@@ -155,7 +154,10 @@
    "default": "0",
    "fieldname": "is_cancelled",
    "fieldtype": "Check",
-   "label": "Is Cancelled"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Is Cancelled",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -185,20 +187,19 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "voucher_detail_no",
-   "fieldtype": "Data",
-   "label": "Voucher Detail No",
-   "read_only": 1
+   "fieldname": "credit_gold",
+   "fieldtype": "Float",
+   "label": "Credit Gold"
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2024-04-11 12:11:01.474208",
+ "modified": "2024-04-29 10:29:20.030522",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Gold Ledger",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

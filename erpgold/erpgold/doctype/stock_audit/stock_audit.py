@@ -24,8 +24,8 @@ class StockAudit(Document):
             self.scan_barcode = ""
             return False
                                                                      
-    # def before_submit(self):
-    #     checked = all(row.checked == 1 for row in self.get('stock_items'))
-    #     if not checked:
-    #         frappe.throw("Please verify all Items")
-    #         return False
+    def before_submit(self):
+        checked = all(row.checked == 1 for row in self.get('stock_items'))
+        if not checked:
+            frappe.throw("Please verify all Items")
+            return False

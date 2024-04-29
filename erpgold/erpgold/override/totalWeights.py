@@ -17,4 +17,3 @@ def total_weights(doc, method):
     doc.custom_total_net_weight = total_net_weight
     doc.custom_total_less_weight = total_less_weight
     doc.custom_total_fine_weight = total_fine_weight
-    doc.save()

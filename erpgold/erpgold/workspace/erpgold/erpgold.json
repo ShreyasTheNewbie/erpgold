@@ -1,0 +1,103 @@
+{
+ "charts": [
+  {
+   "chart_name": "Metal Rate",
+   "label": "Metal Rate"
+  }
+ ],
+ "content": "[{\"id\":\"SGo1XLXKUT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\" style=\\\"\\\">ERPGold</span>\",\"col\":12}},{\"id\":\"-EHrTDGB1M\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gLhLYezoBK\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Metal Rate\",\"col\":12}},{\"id\":\"JfYhdwxmDZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Doctypes\",\"col\":4}}]",
+ "creation": "2024-02-29 16:31:30.333507",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "ERPGold",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Doctypes",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Material Type",
+   "link_count": 0,
+   "link_to": "Metal Rate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purity",
+   "link_count": 0,
+   "link_to": "Purity",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Audit",
+   "link_count": 0,
+   "link_to": "Stock Audit",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gold Ledger",
+   "link_count": 0,
+   "link_to": "Gold Ledger",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gold Scheme Allocation",
+   "link_count": 0,
+   "link_to": "Gold Scheme Allocation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gold Scheme",
+   "link_count": 0,
+   "link_to": "Gold Scheme",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-04-18 17:14:19.696631",
+ "modified_by": "Administrator",
+ "module": "ERPgold",
+ "name": "ERPGold",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [],
+ "title": "ERPGold"
+}
