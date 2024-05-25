@@ -19,13 +19,7 @@ class StockAudit(Document):
         sn = frappe.db.get_all('Serial No', filters={'name': self.scan_barcode,}, fields=['name', 'status' , 'item_code' , 'item_name'])
         if sn:
             return sn
-        else:
-            frappe.msgprint(_("Cannot find Item with this Barcode"),alert =True, indicator='red')
-            self.scan_barcode = ""
+        else: 
             return False
-                                                                     
-    def before_submit(self):
-        checked = all(row.checked == 1 for row in self.get('stock_items'))
-        if not checked:
-            frappe.throw("Please verify all Items")
-            return False
+        
+
