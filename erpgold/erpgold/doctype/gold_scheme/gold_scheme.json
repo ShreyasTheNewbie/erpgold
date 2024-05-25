@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:scheme_name",
  "creation": "2024-02-28 14:44:06.446336",
  "default_view": "List",
  "doctype": "DocType",
@@ -14,8 +15,8 @@
   "last_date_of_enroll",
   "scheme_type",
   "is_free_installment_scheme",
-  "expence_account",
   "no_of_free_installment",
+  "expence_account",
   "paid_installment",
   "scheme_deatils",
   "scheme_rule",
@@ -25,12 +26,8 @@
   {
    "fieldname": "scheme_name",
    "fieldtype": "Data",
-   "label": "Scheme Name"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Data",
-   "label": "Status"
+   "label": "Scheme Name",
+   "unique": 1
   },
   {
    "fieldname": "start_date",
@@ -39,7 +36,7 @@
   },
   {
    "fieldname": "scheme_tenure",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "label": "Scheme Month Tenure"
   },
   {
@@ -66,6 +63,7 @@
    "options": "Account"
   },
   {
+   "depends_on": "is_free_installment_scheme",
    "fieldname": "no_of_free_installment",
    "fieldtype": "Int",
    "label": "No. of Free Installment"
@@ -81,8 +79,9 @@
    "label": "Scheme Deatils"
   },
   {
+   "columns": 1,
    "fieldname": "scheme_rule",
-   "fieldtype": "Data",
+   "fieldtype": "Text Editor",
    "label": "Scheme Rule"
   },
   {
@@ -94,15 +93,22 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nExpired"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2024-03-01 11:25:02.523372",
+ "modified": "2024-04-30 15:58:42.487424",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Gold Scheme",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

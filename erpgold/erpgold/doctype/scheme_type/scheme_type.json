@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:scheme_type",
  "creation": "2024-02-28 14:52:20.233723",
  "default_view": "List",
  "doctype": "DocType",
@@ -14,7 +15,8 @@
   {
    "fieldname": "scheme_type",
    "fieldtype": "Data",
-   "label": "Scheme Type"
+   "label": "Scheme Type",
+   "unique": 1
   },
   {
    "fieldname": "amended_from",
@@ -30,10 +32,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-28 15:25:06.374547",
+ "modified": "2024-04-30 14:50:15.685896",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Scheme Type",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

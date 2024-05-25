@@ -7,6 +7,8 @@ frappe.ui.form.on('Stock Entry Detail', {
         saleslabourtype(frm, cdt, cdn);
         labourtype(frm, cdt, cdn);
         calculateFineWeight(frm,cdt,cdn);
+        custom_gold_value(frm,cdt,cdn);
+
     },
     custom_net_weight: function(frm, cdt, cdn) {
         calculateFineWeight(frm,cdt,cdn);
@@ -29,7 +31,8 @@ frappe.ui.form.on('Stock Entry Detail', {
         custom_gold_value(frm,cdt,cdn);
         
     },
-    
+    custom_gold_rate:function(frm, cdt, cdn) {        custom_gold_value(frm,cdt,cdn);
+    },
     custom_gold_value:function(frm, cdt, cdn) {calculateTotalAmount(frm,cdt,cdn)},
     custom_labour_type:function(frm, cdt, cdn) {labourtype(frm,cdt,cdn)},
     custom_sales_labour_type:function(frm, cdt, cdn) {saleslabourtype(frm,cdt,cdn)},
@@ -89,7 +92,7 @@ function saleslabourtype(frm, cdt, cdn){
     var qty = child.qty;
     
 
-    if (custom_sales_labour_type === 'On Gross Weight Per Gram'){
+    if (custom_sales_labour_type === 'On Gross Weight Per Gram' && child.custom_sales_labour_rate){
         frappe.model.set_value(cdt, cdn, 'custom_sales_labour_rate', '1000');
         refresh_field('custom_sales_labour_rate')
         
@@ -102,7 +105,7 @@ function saleslabourtype(frm, cdt, cdn){
         frappe.model.set_value(cdt, cdn, 'custom_sales_labour_rate', '1200');
         refresh_field('custom_sales_labour_rate')
 
-        var custom_sales_labour_rate=child.custom_sales_labour_rate;
+        var custom_sales_labour_rate=child.custom_sales_labour_rateq;
         var sla = (net_weight * custom_sales_labour_rate) * qty
         frappe.model.set_value(cdt, cdn, 'custom_sales_labour_amount', sla);
         refresh_field('custom_sales_labour_amount')

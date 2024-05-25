@@ -9,10 +9,14 @@
  "engine": "InnoDB",
  "field_order": [
   "audit_date",
+  "section_break_73aez",
   "amended_from",
-  "total__items_in_stock",
-  "total_not_found_items",
+  "total_items_in_stock",
   "scan_barcode",
+  "column_break_9ctpr",
+  "total_not_in_stock_items",
+  "total_not_found_items",
+  "section_break_c2rfg",
   "stock_items",
   "not_in_stock"
  ],
@@ -34,14 +38,11 @@
    "search_index": 1
   },
   {
-   "fieldname": "total__items_in_stock",
-   "fieldtype": "Int",
-   "label": "Total  Items in Stock"
-  },
-  {
+   "bold": 1,
    "fieldname": "total_not_found_items",
    "fieldtype": "Int",
-   "label": "Total Not Found Items"
+   "label": "Total Not Found Items",
+   "read_only": 1
   },
   {
    "fieldname": "scan_barcode",
@@ -53,18 +54,44 @@
    "fieldname": "stock_items",
    "fieldtype": "Table",
    "label": "Stock Items",
-   "options": "Sales Invoice Item"
+   "options": "Stock Items",
+   "width": "100px"
   },
   {
    "fieldname": "not_in_stock",
-   "fieldtype": "Data",
-   "label": "Not in Stock"
+   "fieldtype": "Table",
+   "label": "Not in Stock",
+   "options": "Not In Stock"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_items_in_stock",
+   "fieldtype": "Int",
+   "label": "Total  Items in Stock"
+  },
+  {
+   "fieldname": "column_break_9ctpr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_c2rfg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_73aez",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_not_in_stock_items",
+   "fieldtype": "Int",
+   "label": "Total Not In Stock Items",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-01 12:57:38.872677",
+ "modified": "2024-04-11 17:39:43.494627",
  "modified_by": "Administrator",
  "module": "ERPgold",
  "name": "Stock Audit",

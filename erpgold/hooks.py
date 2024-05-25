@@ -109,7 +109,6 @@ app_include_js = "/assets/erpgold/js/barcode_scan.js"
 # Override standard doctype classes
 
 # override_doctype_class = {
-#     "Purchase Receipt":"erpgold.erpgold.override.serial_no.CustomPurchaseReceipt"
 # }
 
 # Document Events
@@ -117,27 +116,39 @@ app_include_js = "/assets/erpgold/js/barcode_scan.js"
 # Hook on document methods and events
  
 doc_events = {
-    # "Sales Invoice": {
-    #     "after_save": "erpgold.erpgold.override.totalWeights.calculate_total_weights"
-    # },
+    "Delivery Note": {
+        "on_submit": "erpgold.erpgold.override.gl_entry.make_gl_entry",
+        "on_cancel": "erpgold.erpgold.override.gl_entry.cancel_gl_entry"
+    },
      "Stock Entry": {
-        "on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
+        "on_submit": ["erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit",
+                      "erpgold.erpgold.override.gl_entry.make_gl_entry"
+                      ],
+        "on_cancel": "erpgold.erpgold.override.gl_entry.cancel_gl_entry"
     },
 	"Purchase Receipt": {
-        "on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
+        "on_submit": ["erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit",
+                      "erpgold.erpgold.override.gl_entry.make_gl_entry"
+                    ],
+        "on_cancel": "erpgold.erpgold.override.gl_entry.cancel_gl_entry",
+        'validate': "erpgold.erpgold.override.totalWeights.total_weights"
     },
 	"Purchase Invoice":{
-		"on_submit": "erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit"
-	}
-#     "Serial No":{
-#         "get_item_details" : "erpgold.erpgold.override.serial_no.get_item_details",
-#         "validate_item" : "erpgold.erpgold.override.serial_no.cvalidate_item",
-#         "get_item_details" : "erpgold.erpgold.override.serial_no.get_item_details"
-#     },
-#     "Purchase Receipt":{
-#         "after_submit":"erpgold.erpgold.override.serial_no.update_serial_nos_after_submit"
-#     }
-
+		"on_submit": ["erpgold.erpgold.override.serial_no.custom_update_serial_nos_after_submit",
+                        "erpgold.erpgold.override.gl_entry.make_gl_entry"
+                        ],
+        "on_cancel": "erpgold.erpgold.override.gl_entry.cancel_gl_entry",
+        'validate': "erpgold.erpgold.override.totalWeights.total_weights"
+	},
+    "Sales Invoice":{
+        'validate': "erpgold.erpgold.override.totalWeights.total_weights"
+    },
+    "Purchase Order":{
+        'validate': "erpgold.erpgold.override.totalWeights.total_weights"
+    }
+    # "Stock Ledger Entry": {
+    #     "on_submit": "erpgold.erpgold.override.gl_entry.make_gl_from_sle",
+    # }
 }
 
 # Scheduled Tasks
@@ -170,7 +181,7 @@ doc_events = {
 # ------------------------------
 #
 override_whitelisted_methods = {
-	"erpnext.stock.utils.scan_barcode": "erpgold.erpgold.override.barcode.custom_scan_barcode"
+	"erpnext.stock.utils.scan_barcode": "erpgold.erpgold.override.barcode.custom_scan_barcode",
 }
 # #
 # each overriding function accepts a `data` argument;
@@ -239,7 +250,7 @@ override_whitelisted_methods = {
 fixtures = [
     {
     "dt": ("Custom Field"), 
-        "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipt","Purchase Rececipt Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Details","Serial No","Payment Entry","Customer")]]
+        "filters": [["dt", "in", ("Item","Sales Invoice","Sales Invoice Item","Sales Order","Sales Order Item","Delivery Note","Delivery Note Item","Purchase Invoice","Purchase Invoice Item","Purchase Receipt","Purchase Rececipt Item","Purchase Order","Purchase Order Item","Stock Entry","Stock Entry Detail","Serial No","Payment Entry","Customer")]]
     },
     "Property Setter"
     

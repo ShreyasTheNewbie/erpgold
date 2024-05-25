@@ -31,6 +31,7 @@ frappe.ui.form.on('Purchase Invoice Item', {
         custom_gold_value(frm, cdt, cdn);
         saleslabourtype(frm, cdt, cdn);
         labourtype(frm, cdt, cdn);
+        totalWeights(frm);
     },
     custom_fine_weight:function(frm, cdt, cdn) {
         custom_gold_value(frm,cdt,cdn);
