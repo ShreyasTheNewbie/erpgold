@@ -81,7 +81,7 @@ frappe.ui.form.on('Stock Audit', {
 							frm.set_value('total_not_found_items', not_found);
 						}
 					}
-					frm.set_value('scan_barcode', '');
+					frm.set_value('scan_barcode', '');frm.save()
 				}
 			});
 		}

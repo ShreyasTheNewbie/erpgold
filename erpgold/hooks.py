@@ -143,6 +143,9 @@ doc_events = {
     "Sales Invoice":{
         'validate': "erpgold.erpgold.override.totalWeights.total_weights"
     },
+    "Purchase Order":{
+        'validate': "erpgold.erpgold.override.totalWeights.total_weights"
+    }
     # "Stock Ledger Entry": {
     #     "on_submit": "erpgold.erpgold.override.gl_entry.make_gl_from_sle",
     # }

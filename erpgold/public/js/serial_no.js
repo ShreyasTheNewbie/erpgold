@@ -17,5 +17,6 @@ frappe.ui.form.on('Serial No', {
 		for (let f of fields) {
 			frm.set_df_property(f, "read_only", true);
 		}
+		// cur_frm.fields.forEach(function(l){ cur_frm.set_df_property(l.df.fieldname, 'read_only', 1); });
 	}
 });
